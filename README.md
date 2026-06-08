@@ -4,105 +4,87 @@ Aplicação web que gera planos alimentares personalizados com inteligência art
 
 ## Funcionalidades
 
-- Plano alimentar gerado por IA para 4 objetivos diferentes
-- Cálculo de IMC em tempo real
-- Exportação do plano em PDF
-- Interface limpa e responsiva
+- Geração de plano alimentar via IA com base em peso, altura, idade e sexo
+- Cálculo e classificação de IMC em tempo real
+- 4 objetivos nutricionais distintos com diretrizes específicas
+- Exportação do plano em PDF formatado
 
 ## Objetivos suportados
 
-| Objetivo | Descrição |
+| Objetivo | Estratégia |
 |---|---|
-| Emagrecimento | Déficit calórico controlado para perda de gordura |
-| Ganho de Massa | Superávit moderado com foco em proteína |
-| Recomposição Corporal | Perder gordura e ganhar músculo ao mesmo tempo |
-| Manutenção de Peso | Equilíbrio calórico com alimentação saudável |
+| Emagrecimento | Déficit calórico de 300–500 kcal, alto teor de proteína e fibra |
+| Ganho de Massa | Superávit de 200–400 kcal, proteína mínima de 2g/kg |
+| Recomposição Corporal | Calorias próximas ao gasto, proteína elevada |
+| Manutenção de Peso | Equilíbrio calórico com macros balanceados |
 
-## Tecnologias
+## Stack
 
-**Frontend**
-- React 19
-- Vite
-- Tailwind CSS 4
-- jsPDF
+| Camada | Tecnologia |
+|---|---|
+| Frontend | React 19, Vite, Tailwind CSS 4 |
+| Backend | Node.js, Express 5 |
+| IA | Groq API — modelo `llama-3.3-70b-versatile` |
+| PDF | jsPDF |
 
-**Backend**
-- Node.js + Express
-- Groq API (modelo `llama-3.3-70b-versatile`)
-
-## Estrutura do projeto
+## Estrutura
 
 ```
 planonutricional/
 ├── src/
 │   ├── components/
-│   │   ├── UserForm.jsx      # Formulário de dados do usuário
-│   │   ├── BmiCard.jsx       # Card de IMC calculado
-│   │   └── Results.jsx       # Exibição do plano gerado
-│   ├── utils/
-│   │   ├── claudeApi.js      # Comunicação com o backend
-│   │   ├── bmi.js            # Cálculo e classificação de IMC
-│   │   └── exportPdf.js      # Geração do PDF
-│   └── App.jsx
-├── server/
-│   ├── index.js              # API Express + integração Groq
-│   ├── .env                  # Chave da API (não versionado)
-│   └── package.json
-└── package.json
+│   │   ├── UserForm.jsx       # Formulário principal
+│   │   ├── BmiCard.jsx        # Exibição do IMC calculado
+│   │   └── Results.jsx        # Renderização do plano gerado
+│   └── utils/
+│       ├── claudeApi.js       # Chamada ao backend
+│       ├── bmi.js             # Cálculo e classificação de IMC
+│       └── exportPdf.js       # Geração e download do PDF
+└── server/
+    └── index.js               # API REST + prompt + integração Groq
 ```
 
-## Como rodar localmente
+## Como rodar
 
 ### Pré-requisitos
 
 - Node.js 18+
-- Conta na [Groq](https://console.groq.com) para obter uma API key gratuita
+- API key gratuita da [Groq](https://console.groq.com)
 
-### 1. Clone o repositório
-
-```bash
-git clone https://github.com/seu-usuario/planonutricional.git
-cd planonutricional
-```
-
-### 2. Configure o servidor
+### Backend
 
 ```bash
 cd server
 npm install
 ```
 
-Crie um arquivo `.env` dentro da pasta `server/`:
+Crie o arquivo `server/.env`:
 
 ```env
 GROQ_API_KEY=sua_chave_aqui
 ```
 
-Inicie o servidor:
-
 ```bash
 npm start
 ```
 
-O servidor ficará disponível em `http://localhost:3001`.
+Servidor disponível em `http://localhost:3001`.
 
-### 3. Configure o frontend
-
-Em outro terminal, na raiz do projeto:
+### Frontend
 
 ```bash
 npm install
 npm run dev
 ```
 
-O frontend ficará disponível em `http://localhost:5173`.
+Frontend disponível em `http://localhost:5173`.
 
 ## Variáveis de ambiente
 
-| Variável | Descrição |
-|---|---|
-| `GROQ_API_KEY` | Chave de acesso à API da Groq |
-| `PORT` | Porta do servidor (padrão: `3001`) |
+| Variável | Descrição | Padrão |
+|---|---|---|
+| `GROQ_API_KEY` | Chave da API Groq | — |
+| `PORT` | Porta do servidor | `3001` |
 
 ## Licença
 
