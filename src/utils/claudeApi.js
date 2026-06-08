@@ -7,7 +7,7 @@ const OBJETIVOS = {
 }
 
 export async function gerarPlano({ peso, altura, idade, sexo, objetivo }) {
-  const response = await fetch('http://localhost:3001/api/gerar-plano', {
+  const response = await fetch('https://planonutricional.onrender.com/api/gerar-plano', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ peso, altura, idade, sexo, objetivo }),
