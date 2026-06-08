@@ -21,10 +21,25 @@ const OBJETIVOS = [
   },
 ]
 
+function formatarAltura(valor) {
+  const digits = valor.replace(/\D/g, '').slice(0, 3)
+  if (digits.length <= 1) return digits
+  if (digits.length === 2) return `${digits[0]},${digits[1]}`
+  return `${digits[0]},${digits[1]}${digits[2]}`
+}
+
 export default function UserForm({ dados, onChange, onSubmit, loading }) {
   const inputClass =
     'w-full rounded-lg border border-zinc-200 bg-white px-3 py-2.5 text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 transition'
   const labelClass = 'block text-xs font-semibold text-zinc-500 uppercase tracking-wide mb-1.5'
+
+  const handleAltura = (e) => {
+    const formatado = formatarAltura(e.target.value)
+    const digits = formatado.replace(/\D/g, '')
+    const cm = digits.length === 3 ? parseInt(digits, 10) : ''
+    onChange('alturaDisplay', formatado)
+    onChange('altura', cm)
+  }
 
   return (
     <form onSubmit={onSubmit} className="space-y-5">
@@ -45,16 +60,16 @@ export default function UserForm({ dados, onChange, onSubmit, loading }) {
           />
         </div>
         <div>
-          <label className={labelClass}>Altura (cm)</label>
+          <label className={labelClass}>Altura (m)</label>
           <input
-            type="number"
-            min="100"
-            max="250"
-            placeholder="175"
+            type="text"
+            inputMode="numeric"
+            placeholder="1,75"
+            maxLength={4}
             className={inputClass}
             required
-            value={dados.altura}
-            onChange={(e) => onChange('altura', e.target.value)}
+            value={dados.alturaDisplay || ''}
+            onChange={handleAltura}
           />
         </div>
       </div>

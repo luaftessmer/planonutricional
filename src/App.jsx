@@ -7,6 +7,7 @@ import { gerarPlano } from './utils/claudeApi'
 const DADOS_INICIAIS = {
   peso: '',
   altura: '',
+  alturaDisplay: '',
   idade: '',
   sexo: '',
   objetivo: '',
