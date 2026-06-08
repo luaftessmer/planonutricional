@@ -6,7 +6,7 @@ const Groq = require('groq-sdk')
 const app = express()
 const client = new Groq({ apiKey: process.env.GROQ_API_KEY })
 
-app.use(cors({ origin: ['http://localhost:5173', /\.vercel\.app$/] }))
+app.use(cors({ origin: ['http://localhost:5173', 'https://planonutricional-rjcjs14nf-luaftessmers-projects.vercel.app'] }))
 app.use(express.json())
 
 const OBJETIVOS = {
