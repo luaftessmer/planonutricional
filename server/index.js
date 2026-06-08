@@ -95,7 +95,7 @@ Gere exatamente neste formato:
 
   try {
     const completion = await client.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model: 'llama-3.1-8b-instant',
       max_tokens: 1200,
       messages: [{ role: 'user', content: prompt }],
     })
